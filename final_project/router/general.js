@@ -33,7 +33,7 @@ public_users.get('/author/:author', function (req, res) {
 
   // Iterate through the books
   for (let key in books) {
-    if (books[key].author.toLowerCase() === authorName.toLowerCase()) {
+    if (books[key].author === authorName) {
       matchingBooks.push(books[key]);
     }
   }
@@ -50,8 +50,23 @@ public_users.get('/author/:author', function (req, res) {
 
 // Get all books based on title
 public_users.get('/title/:title', function (req, res) {
-  //Write your code here
-  return res.status(300).json({ message: "Yet to be implemented" });
+  const title = req.params.title; // Get the params title
+  const matchingBooks = [];
+
+  // Iterate through the books
+  for (let key in books) {
+    if (books[key].title === title) {
+      matchingBooks.push(books[key]);
+    }
+  }
+
+  if (matchingBooks.length > 0) {
+    res.status(200).json(
+      matchingBooks
+    );
+  } else {
+    res.status(404).json({ message: "No books found by this title" });
+  }
 });
 
 //  Get book review
