@@ -4,7 +4,6 @@ let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
 
-
 public_users.post("/register", (req, res) => {
   const { username, password } = req.body; // Get the username and password
 
@@ -18,7 +17,7 @@ public_users.post("/register", (req, res) => {
     return res.status(400).json({ message: "Username already exists." });
   }
 
-  // Regisration of the new user
+  // Regisration of the new
   users.push({ username, password });
   return res.status(201).json({ message: "User registered successfully." });
 });
